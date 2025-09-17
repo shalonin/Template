@@ -1,10 +1,10 @@
 using UnityEngine;
 
 /// <summary>
-/// Базовый класс для создания Singleton'ов в Unity
-/// Автоматически сохраняется при переходе между сценами
+/// Р‘Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ Singleton'РѕРІ РІ Unity
+/// РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ РїСЂРё РїРµСЂРµС…РѕРґРµ РјРµР¶РґСѓ СЃС†РµРЅР°РјРё
 /// </summary>
-/// <typeparam name="T">Тип наследуемого класса</typeparam>
+/// <typeparam name="T">РўРёРї РЅР°СЃР»РµРґСѓРµРјРѕРіРѕ РєР»Р°СЃСЃР°</typeparam>
 public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
     private static T _instance;
@@ -12,7 +12,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     private static bool _applicationIsQuitting = false;
 
     /// <summary>
-    /// Свойство для получения экземпляра Singleton'а
+    /// РЎРІРѕР№СЃС‚РІРѕ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЌРєР·РµРјРїР»СЏСЂР° Singleton'Р°
     /// </summary>
     public static T Instance
     {
@@ -28,17 +28,17 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
             {
                 if (_instance == null)
                 {
-                    // Ищем существующий экземпляр
+                    // РС‰РµРј СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ СЌРєР·РµРјРїР»СЏСЂ
                     _instance = FindObjectOfType<T>();
 
                     if (_instance == null)
                     {
-                        // Создаем новый GameObject с компонентом
+                        // РЎРѕР·РґР°РµРј РЅРѕРІС‹Р№ GameObject СЃ РєРѕРјРїРѕРЅРµРЅС‚РѕРј
                         GameObject singletonObject = new GameObject();
                         _instance = singletonObject.AddComponent<T>();
                         singletonObject.name = $"({nameof(Singleton<T>)}) {typeof(T)}";
 
-                        // Делаем DontDestroyOnLoad чтобы сохранялся между сценами
+                        // Р”РµР»Р°РµРј DontDestroyOnLoad С‡С‚РѕР±С‹ СЃРѕС…СЂР°РЅСЏР»СЃСЏ РјРµР¶РґСѓ СЃС†РµРЅР°РјРё
                         DontDestroyOnLoad(singletonObject);
                     }
                 }
@@ -49,12 +49,12 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     }
 
     /// <summary>
-    /// Проверка существования экземпляра
+    /// РџСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ СЌРєР·РµРјРїР»СЏСЂР°
     /// </summary>
     public static bool HasInstance => _instance != null;
 
     /// <summary>
-    /// Метод Awake - вызывается при создании объекта
+    /// РњРµС‚РѕРґ Awake - РІС‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё СЃРѕР·РґР°РЅРёРё РѕР±СЉРµРєС‚Р°
     /// </summary>
     protected virtual void Awake()
     {
@@ -74,7 +74,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     }
 
     /// <summary>
-    /// Метод OnDestroy - вызывается при уничтожении объекта
+    /// РњРµС‚РѕРґ OnDestroy - РІС‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё СѓРЅРёС‡С‚РѕР¶РµРЅРёРё РѕР±СЉРµРєС‚Р°
     /// </summary>
     protected virtual void OnDestroy()
     {
@@ -86,7 +86,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     }
 
     /// <summary>
-    /// Метод OnApplicationQuit - вызывается при закрытии приложения
+    /// РњРµС‚РѕРґ OnApplicationQuit - РІС‹Р·С‹РІР°РµС‚СЃСЏ РїСЂРё Р·Р°РєСЂС‹С‚РёРё РїСЂРёР»РѕР¶РµРЅРёСЏ
     /// </summary>
     protected virtual void OnApplicationQuit()
     {
