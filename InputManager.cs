@@ -1,8 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// Менеджер ввода для универсального управления на разных платформах
-/// Поддерживает как тач, так и клавиатуру/мышь
+/// РњРµРЅРµРґР¶РµСЂ РІРІРѕРґР° РґР»СЏ СѓРЅРёРІРµСЂСЃР°Р»СЊРЅРѕРіРѕ СѓРїСЂР°РІР»РµРЅРёСЏ РЅР° СЂР°Р·РЅС‹С… РїР»Р°С‚С„РѕСЂРјР°С…
+/// РџРѕРґРґРµСЂР¶РёРІР°РµС‚ РєР°Рє С‚Р°С‡, С‚Р°Рє Рё РєР»Р°РІРёР°С‚СѓСЂСѓ/РјС‹С€СЊ
 /// </summary>
 public class InputManager : Singleton<InputManager>
 {
@@ -13,7 +13,7 @@ public class InputManager : Singleton<InputManager>
     private bool isInitialized = false;
 
     /// <summary>
-    /// Инициализация менеджера ввода
+    /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РјРµРЅРµРґР¶РµСЂР° РІРІРѕРґР°
     /// </summary>
     protected override void Awake()
     {
@@ -22,7 +22,7 @@ public class InputManager : Singleton<InputManager>
     }
 
     /// <summary>
-    /// Инициализация компонентов ввода
+    /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕРјРїРѕРЅРµРЅС‚РѕРІ РІРІРѕРґР°
     /// </summary>
     private void Initialize()
     {
@@ -30,16 +30,16 @@ public class InputManager : Singleton<InputManager>
         
         if (isMobile)
         {
-            virtualJoystick = FindObjectOfType<VirtualJoystick>();
+            virtualJoystick = FindAnyObjectByType<VirtualJoystick>();
         }
         
         isInitialized = true;
     }
 
     /// <summary>
-    /// Получение горизонтального ввода
+    /// РџРѕР»СѓС‡РµРЅРёРµ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРіРѕ РІРІРѕРґР°
     /// </summary>
-    /// <returns>Значение от -1 до 1</returns>
+    /// <returns>Р—РЅР°С‡РµРЅРёРµ РѕС‚ -1 РґРѕ 1</returns>
     public float GetHorizontalInput()
     {
         if (isMobile && virtualJoystick != null)
@@ -54,9 +54,9 @@ public class InputManager : Singleton<InputManager>
     }
 
     /// <summary>
-    /// Получение вертикального ввода
+    /// РџРѕР»СѓС‡РµРЅРёРµ РІРµСЂС‚РёРєР°Р»СЊРЅРѕРіРѕ РІРІРѕРґР°
     /// </summary>
-    /// <returns>Значение от -1 до 1</returns>
+    /// <returns>Р—РЅР°С‡РµРЅРёРµ РѕС‚ -1 РґРѕ 1</returns>
     public float GetVerticalInput()
     {
         if (isMobile && virtualJoystick != null)
@@ -71,15 +71,15 @@ public class InputManager : Singleton<InputManager>
     }
 
     /// <summary>
-    /// Проверка нажатия кнопки прыжка
+    /// РџСЂРѕРІРµСЂРєР° РЅР°Р¶Р°С‚РёСЏ РєРЅРѕРїРєРё РїСЂС‹Р¶РєР°
     /// </summary>
-    /// <returns>true если нажата кнопка прыжка</returns>
+    /// <returns>true РµСЃР»Рё РЅР°Р¶Р°С‚Р° РєРЅРѕРїРєР° РїСЂС‹Р¶РєР°</returns>
     public bool GetJumpInput()
     {
         if (isMobile)
         {
-            // Для мобильной версии можно использовать отдельную кнопку
-            return false; // Реализуется через UI кнопки
+            // Р”Р»СЏ РјРѕР±РёР»СЊРЅРѕР№ РІРµСЂСЃРёРё РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РѕС‚РґРµР»СЊРЅСѓСЋ РєРЅРѕРїРєСѓ
+            return false; // Р РµР°Р»РёР·СѓРµС‚СЃСЏ С‡РµСЂРµР· UI РєРЅРѕРїРєРё
         }
         else
         {
@@ -88,9 +88,9 @@ public class InputManager : Singleton<InputManager>
     }
 
     /// <summary>
-    /// Установка платформы
+    /// РЈСЃС‚Р°РЅРѕРІРєР° РїР»Р°С‚С„РѕСЂРјС‹
     /// </summary>
-    /// <param name="mobile">true для мобильной платформы</param>
+    /// <param name="mobile">true РґР»СЏ РјРѕР±РёР»СЊРЅРѕР№ РїР»Р°С‚С„РѕСЂРјС‹</param>
     public void SetPlatform(bool mobile)
     {
         isMobile = mobile;
@@ -98,7 +98,8 @@ public class InputManager : Singleton<InputManager>
     }
 
     /// <summary>
-    /// Проверка является ли текущая платформа мобильной
+    /// РџСЂРѕРІРµСЂРєР° СЏРІР»СЏРµС‚СЃСЏ Р»Рё С‚РµРєСѓС‰Р°СЏ РїР»Р°С‚С„РѕСЂРјР° РјРѕР±РёР»СЊРЅРѕР№
     /// </summary>
     public bool IsMobile => isMobile;
+
 }
