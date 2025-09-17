@@ -29,7 +29,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
                 if (_instance == null)
                 {
                     // Ищем существующий экземпляр
-                    _instance = FindObjectOfType<T>();
+                    _instance = FindAnyObjectByType<T>();
 
                     if (_instance == null)
                     {
@@ -93,3 +93,4 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         _applicationIsQuitting = true;
     }
 }
+
