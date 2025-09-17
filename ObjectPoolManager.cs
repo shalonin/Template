@@ -4,19 +4,19 @@ using UnityEngine;
 using static ObjectPoolManager;
 
 /// <summary>
-/// Менеджер пулов объектов для оптимизации производительности
-/// Позволяет повторно использовать объекты вместо постоянного создания/уничтожения
+/// РњРµРЅРµРґР¶РµСЂ РїСѓР»РѕРІ РѕР±СЉРµРєС‚РѕРІ РґР»СЏ РѕРїС‚РёРјРёР·Р°С†РёРё РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊРЅРѕСЃС‚Рё
+/// РџРѕР·РІРѕР»СЏРµС‚ РїРѕРІС‚РѕСЂРЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РѕР±СЉРµРєС‚С‹ РІРјРµСЃС‚Рѕ РїРѕСЃС‚РѕСЏРЅРЅРѕРіРѕ СЃРѕР·РґР°РЅРёСЏ/СѓРЅРёС‡С‚РѕР¶РµРЅРёСЏ
 /// </summary>
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     /// <summary>
-    /// Структура для хранения информации о выпадении предмета
+    /// РЎС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РІС‹РїР°РґРµРЅРёРё РїСЂРµРґРјРµС‚Р°
     /// </summary>
     [System.Serializable]
     public class DropItem
     {
         public GameObject prefab;
-        [Range(0f, 100f)] public float dropChance = 100f; // Шанс выпадения в процентах
+        [Range(0f, 100f)] public float dropChance = 100f; // РЁР°РЅСЃ РІС‹РїР°РґРµРЅРёСЏ РІ РїСЂРѕС†РµРЅС‚Р°С…
 
         public DropItem(GameObject prefab, float chance)
         {
@@ -26,11 +26,11 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// Структура для хранения пула объектов с системой выпадения
+    /// РЎС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РїСѓР»Р° РѕР±СЉРµРєС‚РѕРІ СЃ СЃРёСЃС‚РµРјРѕР№ РІС‹РїР°РґРµРЅРёСЏ
     /// </summary>
     private class DropPool
     {
-        public Dictionary<string, Queue<GameObject>> pooledObjects; // Пулы для каждого префаба
+        public Dictionary<string, Queue<GameObject>> pooledObjects; // РџСѓР»С‹ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїСЂРµС„Р°Р±Р°
         public DropItem[] dropItems;
         public Transform parent;
         public int defaultSize;
@@ -44,7 +44,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             this.parent = parentTransform;
             this.pooledObjects = new Dictionary<string, Queue<GameObject>>();
 
-            // Создаем пулы для каждого префаба
+            // РЎРѕР·РґР°РµРј РїСѓР»С‹ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїСЂРµС„Р°Р±Р°
             foreach (var item in dropItems)
             {
                 if (item.prefab != null)
@@ -52,7 +52,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
                     string key = item.prefab.name;
                     pooledObjects[key] = new Queue<GameObject>();
 
-                    // Создаем начальный пул объектов
+                    // РЎРѕР·РґР°РµРј РЅР°С‡Р°Р»СЊРЅС‹Р№ РїСѓР» РѕР±СЉРµРєС‚РѕРІ
                     for (int i = 0; i < size; i++)
                     {
                         GameObject obj = CreatePooledObject(item.prefab, key);
@@ -64,7 +64,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
 
         /// <summary>
-        /// Создание нового объекта для пула
+        /// РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РѕР±СЉРµРєС‚Р° РґР»СЏ РїСѓР»Р°
         /// </summary>
         private GameObject CreatePooledObject(GameObject prefab, string poolKey)
         {
@@ -76,11 +76,11 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
 
         /// <summary>
-        /// Получение объекта из пула по системе выпадения
+        /// РџРѕР»СѓС‡РµРЅРёРµ РѕР±СЉРµРєС‚Р° РёР· РїСѓР»Р° РїРѕ СЃРёСЃС‚РµРјРµ РІС‹РїР°РґРµРЅРёСЏ
         /// </summary>
         public GameObject GetPooledObject()
         {
-            // Выбираем предмет по шансам выпадения
+            // Р’С‹Р±РёСЂР°РµРј РїСЂРµРґРјРµС‚ РїРѕ С€Р°РЅСЃР°Рј РІС‹РїР°РґРµРЅРёСЏ
             GameObject selectedPrefab = SelectItemByDropChance();
 
             if (selectedPrefab == null) return null;
@@ -104,7 +104,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
 
         /// <summary>
-        /// Возврат объекта в соответствующий пул
+        /// Р’РѕР·РІСЂР°С‚ РѕР±СЉРµРєС‚Р° РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РїСѓР»
         /// </summary>
         public void ReturnObjectToPool(GameObject obj)
         {
@@ -118,11 +118,11 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
 
         /// <summary>
-        /// Выбор предмета по шансам выпадения
+        /// Р’С‹Р±РѕСЂ РїСЂРµРґРјРµС‚Р° РїРѕ С€Р°РЅСЃР°Рј РІС‹РїР°РґРµРЅРёСЏ
         /// </summary>
         private GameObject SelectItemByDropChance()
         {
-            // Метод рулетки (Roulette Wheel Selection)
+            // РњРµС‚РѕРґ СЂСѓР»РµС‚РєРё (Roulette Wheel Selection)
             float totalChance = dropItems.Sum(item => item.dropChance);
             float randomValue = Random.Range(0f, totalChance);
 
@@ -136,12 +136,12 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
                 }
             }
 
-            // Если что-то пошло не так, возвращаем первый доступный префаб
+            // Р•СЃР»Рё С‡С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє, РІРѕР·РІСЂР°С‰Р°РµРј РїРµСЂРІС‹Р№ РґРѕСЃС‚СѓРїРЅС‹Р№ РїСЂРµС„Р°Р±
             return dropItems.FirstOrDefault(item => item.prefab != null)?.prefab;
         }
 
         /// <summary>
-        /// Получение ключа для пула выпадения
+        /// РџРѕР»СѓС‡РµРЅРёРµ РєР»СЋС‡Р° РґР»СЏ РїСѓР»Р° РІС‹РїР°РґРµРЅРёСЏ
         /// </summary>
         private string GetDropPoolKey(DropItem[] items)
         {
@@ -154,25 +154,25 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// Компонент для отслеживания принадлежности объекта к пулу
+    /// РљРѕРјРїРѕРЅРµРЅС‚ РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ РїСЂРёРЅР°РґР»РµР¶РЅРѕСЃС‚Рё РѕР±СЉРµРєС‚Р° Рє РїСѓР»Сѓ
     /// </summary>
     public class PooledObject : MonoBehaviour
     {
-        public string poolTag; // Ключ конкретного префаба в пуле
-        public string dropPoolKey; // Ключ пула выпадения
-        public System.Action onReturnToPool; // Callback при возврате в пул
+        public string poolTag; // РљР»СЋС‡ РєРѕРЅРєСЂРµС‚РЅРѕРіРѕ РїСЂРµС„Р°Р±Р° РІ РїСѓР»Рµ
+        public string dropPoolKey; // РљР»СЋС‡ РїСѓР»Р° РІС‹РїР°РґРµРЅРёСЏ
+        public System.Action onReturnToPool; // Callback РїСЂРё РІРѕР·РІСЂР°С‚Рµ РІ РїСѓР»
     }
 
     [Header("Pool Settings")]
     [SerializeField] private bool createPoolParent = true;
 
-    private Dictionary<string, DropPool> dropPools; // Пулы выпадения
+    private Dictionary<string, DropPool> dropPools; // РџСѓР»С‹ РІС‹РїР°РґРµРЅРёСЏ
     private Transform poolParent;
 
     #region Unity Lifecycle
 
     /// <summary>
-    /// Инициализация менеджера пулов
+    /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РјРµРЅРµРґР¶РµСЂР° РїСѓР»РѕРІ
     /// </summary>
     protected override void Awake()
     {
@@ -185,7 +185,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     #region Initialization
 
     /// <summary>
-    /// Инициализация системы пулов
+    /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃРёСЃС‚РµРјС‹ РїСѓР»РѕРІ
     /// </summary>
     private void Initialize()
     {
@@ -203,12 +203,12 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     #region Pool Management
 
     /// <summary>
-    /// Создание нового пула выпадения
+    /// РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РїСѓР»Р° РІС‹РїР°РґРµРЅРёСЏ
     /// </summary>
-    /// <param name="dropItems">Массив предметов с шансами выпадения</param>
-    /// <param name="size">Начальный размер пула для каждого префаба</param>
-    /// <param name="expandable">Могут ли пулы расширяться</param>
-    /// <param name="parent">Родительский объект для пулов (опционально)</param>
+    /// <param name="dropItems">РњР°СЃСЃРёРІ РїСЂРµРґРјРµС‚РѕРІ СЃ С€Р°РЅСЃР°РјРё РІС‹РїР°РґРµРЅРёСЏ</param>
+    /// <param name="size">РќР°С‡Р°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ РїСѓР»Р° РґР»СЏ РєР°Р¶РґРѕРіРѕ РїСЂРµС„Р°Р±Р°</param>
+    /// <param name="expandable">РњРѕРіСѓС‚ Р»Рё РїСѓР»С‹ СЂР°СЃС€РёСЂСЏС‚СЊСЃСЏ</param>
+    /// <param name="parent">Р РѕРґРёС‚РµР»СЊСЃРєРёР№ РѕР±СЉРµРєС‚ РґР»СЏ РїСѓР»РѕРІ (РѕРїС†РёРѕРЅР°Р»СЊРЅРѕ)</param>
     public void CreateDropPool(DropItem[] dropItems, int size, bool expandable = true, Transform parent = null)
     {
         if (dropItems == null || dropItems.Length == 0)
@@ -230,7 +230,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// Создание простого пула для одного префаба
+    /// РЎРѕР·РґР°РЅРёРµ РїСЂРѕСЃС‚РѕРіРѕ РїСѓР»Р° РґР»СЏ РѕРґРЅРѕРіРѕ РїСЂРµС„Р°Р±Р°
     /// </summary>
     public void CreatePool(GameObject prefab, int size, bool expandable = true, Transform parent = null)
     {
@@ -239,7 +239,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// Предзагрузка нескольких пулов
+    /// РџСЂРµРґР·Р°РіСЂСѓР·РєР° РЅРµСЃРєРѕР»СЊРєРёС… РїСѓР»РѕРІ
     /// </summary>
     public void PreloadDropPools(DropPoolData[] poolData)
     {
@@ -250,7 +250,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// Генерация ключа для пула выпадения
+    /// Р“РµРЅРµСЂР°С†РёСЏ РєР»СЋС‡Р° РґР»СЏ РїСѓР»Р° РІС‹РїР°РґРµРЅРёСЏ
     /// </summary>
     private string GenerateDropPoolKey(DropItem[] items)
     {
@@ -266,12 +266,12 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     #region Object Management
 
     /// <summary>
-    /// Получение объекта из пула выпадения по системе шансов
+    /// РџРѕР»СѓС‡РµРЅРёРµ РѕР±СЉРµРєС‚Р° РёР· РїСѓР»Р° РІС‹РїР°РґРµРЅРёСЏ РїРѕ СЃРёСЃС‚РµРјРµ С€Р°РЅСЃРѕРІ
     /// </summary>
-    /// <param name="dropItems">Массив предметов с шансами</param>
-    /// <param name="position">Позиция спавна</param>
-    /// <param name="rotation">Поворот спавна</param>
-    /// <returns>Объект из пула или null</returns>
+    /// <param name="dropItems">РњР°СЃСЃРёРІ РїСЂРµРґРјРµС‚РѕРІ СЃ С€Р°РЅСЃР°РјРё</param>
+    /// <param name="position">РџРѕР·РёС†РёСЏ СЃРїР°РІРЅР°</param>
+    /// <param name="rotation">РџРѕРІРѕСЂРѕС‚ СЃРїР°РІРЅР°</param>
+    /// <returns>РћР±СЉРµРєС‚ РёР· РїСѓР»Р° РёР»Рё null</returns>
     public GameObject GetDropObject(DropItem[] dropItems, Vector3 position = default, Quaternion rotation = default)
     {
         string poolKey = GenerateDropPoolKey(dropItems);
@@ -294,7 +294,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// Получение объекта из простого пула
+    /// РџРѕР»СѓС‡РµРЅРёРµ РѕР±СЉРµРєС‚Р° РёР· РїСЂРѕСЃС‚РѕРіРѕ РїСѓР»Р°
     /// </summary>
     public GameObject GetPooledObject(GameObject prefab, Vector3 position = default, Quaternion rotation = default)
     {
@@ -303,7 +303,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// Возврат объекта в пул
+    /// Р’РѕР·РІСЂР°С‚ РѕР±СЉРµРєС‚Р° РІ РїСѓР»
     /// </summary>
     public void ReturnObjectToPool(GameObject obj)
     {
@@ -316,7 +316,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             return;
         }
 
-        // Вызываем callback если есть
+        // Р’С‹Р·С‹РІР°РµРј callback РµСЃР»Рё РµСЃС‚СЊ
         pooledObj.onReturnToPool?.Invoke();
         pooledObj.onReturnToPool = null;
 
@@ -325,7 +325,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         bool returned = false;
         foreach (var pool in dropPools.Values)
         {
-            // Ищем пул, которому принадлежит объект
+            // РС‰РµРј РїСѓР», РєРѕС‚РѕСЂРѕРјСѓ РїСЂРёРЅР°РґР»РµР¶РёС‚ РѕР±СЉРµРєС‚
             if (pool.pooledObjects.ContainsKey(pooledObj.poolTag))
             {
                 pool.ReturnObjectToPool(obj);
@@ -342,7 +342,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// Уничтожение объекта (возвращает в пул или уничтожает)
+    /// РЈРЅРёС‡С‚РѕР¶РµРЅРёРµ РѕР±СЉРµРєС‚Р° (РІРѕР·РІСЂР°С‰Р°РµС‚ РІ РїСѓР» РёР»Рё СѓРЅРёС‡С‚РѕР¶Р°РµС‚)
     /// </summary>
     public void DestroyObject(GameObject obj, float delay = 0f)
     {
@@ -357,7 +357,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// Корутина для возврата объекта в пул с задержкой
+    /// РљРѕСЂСѓС‚РёРЅР° РґР»СЏ РІРѕР·РІСЂР°С‚Р° РѕР±СЉРµРєС‚Р° РІ РїСѓР» СЃ Р·Р°РґРµСЂР¶РєРѕР№
     /// </summary>
     private System.Collections.IEnumerator ReturnObjectAfterDelay(GameObject obj, float delay)
     {
@@ -370,7 +370,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     #region Utility Methods
 
     /// <summary>
-    /// Очистка всех пулов
+    /// РћС‡РёСЃС‚РєР° РІСЃРµС… РїСѓР»РѕРІ
     /// </summary>
     public void ClearAllPools()
     {
@@ -389,7 +389,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     /// <summary>
-    /// Получение информации о пуле
+    /// РџРѕР»СѓС‡РµРЅРёРµ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РїСѓР»Рµ
     /// </summary>
     public int GetPoolCount(string prefabName)
     {
@@ -407,7 +407,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 }
 
 /// <summary>
-/// Структура данных для предзагрузки пулов выпадения
+/// РЎС‚СЂСѓРєС‚СѓСЂР° РґР°РЅРЅС‹С… РґР»СЏ РїСЂРµРґР·Р°РіСЂСѓР·РєРё РїСѓР»РѕРІ РІС‹РїР°РґРµРЅРёСЏ
 /// </summary>
 [System.Serializable]
 public struct DropPoolData
