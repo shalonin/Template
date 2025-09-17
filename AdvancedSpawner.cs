@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Расширенный спавнер с поддержкой различных типов спавна и настроек
+/// Р Р°СЃС€РёСЂРµРЅРЅС‹Р№ СЃРїР°РІРЅРµСЂ СЃ РїРѕРґРґРµСЂР¶РєРѕР№ СЂР°Р·Р»РёС‡РЅС‹С… С‚РёРїРѕРІ СЃРїР°РІРЅР° Рё РЅР°СЃС‚СЂРѕРµРє
 /// </summary>
 public class AdvancedSpawner : MonoBehaviour
 {
     /// <summary>
-    /// Типы спавна
+    /// РўРёРїС‹ СЃРїР°РІРЅР°
     /// </summary>
     public enum SpawnType
     {
@@ -19,7 +19,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Типы интервалов
+    /// РўРёРїС‹ РёРЅС‚РµСЂРІР°Р»РѕРІ
     /// </summary>
     public enum IntervalType
     {
@@ -32,11 +32,11 @@ public class AdvancedSpawner : MonoBehaviour
     public class SpawnPointData
     {
         public Transform point;
-        public float weight = 1f; // Вес точки для случайного выбора
-        public float spawnInterval = 1f; // Индивидуальный интервал для точки
+        public float weight = 1f; // Р’РµСЃ С‚РѕС‡РєРё РґР»СЏ СЃР»СѓС‡Р°Р№РЅРѕРіРѕ РІС‹Р±РѕСЂР°
+        public float spawnInterval = 1f; // РРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹Р№ РёРЅС‚РµСЂРІР°Р» РґР»СЏ С‚РѕС‡РєРё
         public IntervalType intervalType = IntervalType.Fixed;
-        public Vector2 randomRange = new Vector2(0.5f, 2f); // Для RandomRange
-        public float[] randomIntervals = new float[] { 0.5f, 1f, 1.5f, 2f }; // Для RandomList
+        public Vector2 randomRange = new Vector2(0.5f, 2f); // Р”Р»СЏ RandomRange
+        public float[] randomIntervals = new float[] { 0.5f, 1f, 1.5f, 2f }; // Р”Р»СЏ RandomList
     }
 
     [Header("Spawn Settings")]
@@ -47,7 +47,7 @@ public class AdvancedSpawner : MonoBehaviour
     [Header("Spawn Points")]
     [SerializeField] private Transform singleSpawnPoint;
     [SerializeField] private SpawnPointData[] spawnPoints;
-    [SerializeField] private Bounds spawnArea = new Bounds(Vector3.zero, Vector3.one * 10f); // Для Area спавна
+    [SerializeField] private Bounds spawnArea = new Bounds(Vector3.zero, Vector3.one * 10f); // Р”Р»СЏ Area СЃРїР°РІРЅР°
 
     [Header("Timing")]
     [SerializeField] private float globalSpawnInterval = 1f;
@@ -63,19 +63,19 @@ public class AdvancedSpawner : MonoBehaviour
     [Header("Pool Settings")]
     [SerializeField] private int initialPoolSize = 10;
     [SerializeField] private bool poolExpandable = true;
-    [SerializeField] private float poolRandomPercentage = 0f; // Процент случайности для пула
+    [SerializeField] private float poolRandomPercentage = 0f; // РџСЂРѕС†РµРЅС‚ СЃР»СѓС‡Р°Р№РЅРѕСЃС‚Рё РґР»СЏ РїСѓР»Р°
 
     [Header("Drop System")]
     [SerializeField] private bool useDropSystem = false;
-    [SerializeField] private ObjectPoolManager.DropItem[] dropItems; // Предметы с шансами выпадения
+    [SerializeField] private ObjectPoolManager.DropItem[] dropItems; // РџСЂРµРґРјРµС‚С‹ СЃ С€Р°РЅСЃР°РјРё РІС‹РїР°РґРµРЅРёСЏ
 
     [Header("Active Objects Limit")]
     [SerializeField] private bool useActiveLimit = false;
     [SerializeField] private int maxActiveObjects = 10;
     [SerializeField] private int minActiveObjects = 0;
-    [SerializeField] private float checkInterval = 1f; // Интервал проверки количества активных объектов
+    [SerializeField] private float checkInterval = 1f; // РРЅС‚РµСЂРІР°Р» РїСЂРѕРІРµСЂРєРё РєРѕР»РёС‡РµСЃС‚РІР° Р°РєС‚РёРІРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
 
-    private List<GameObject> activeObjects; // Список активных объектов
+    private List<GameObject> activeObjects; // РЎРїРёСЃРѕРє Р°РєС‚РёРІРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
     private bool isSpawningAllowed = true;
     private Coroutine limitCheckCoroutine;
 
@@ -94,7 +94,7 @@ public class AdvancedSpawner : MonoBehaviour
             SpawnObjects();
         }
 
-        // Запускаем проверку лимитов если включено
+        // Р—Р°РїСѓСЃРєР°РµРј РїСЂРѕРІРµСЂРєСѓ Р»РёРјРёС‚РѕРІ РµСЃР»Рё РІРєР»СЋС‡РµРЅРѕ
         if (useActiveLimit)
         {
             limitCheckCoroutine = StartCoroutine(CheckActiveObjectsLimit());
@@ -133,7 +133,7 @@ public class AdvancedSpawner : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Очищаем все активные объекты при уничтожении спавнера
+        // РћС‡РёС‰Р°РµРј РІСЃРµ Р°РєС‚РёРІРЅС‹Рµ РѕР±СЉРµРєС‚С‹ РїСЂРё СѓРЅРёС‡С‚РѕР¶РµРЅРёРё СЃРїР°РІРЅРµСЂР°
         if (activeObjects != null)
         {
             foreach (var obj in activeObjects)
@@ -157,7 +157,7 @@ public class AdvancedSpawner : MonoBehaviour
     #region Initialization
 
     /// <summary>
-    /// Инициализация спавнера
+    /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃРїР°РІРЅРµСЂР°
     /// </summary>
     private void Initialize()
     {
@@ -166,7 +166,7 @@ public class AdvancedSpawner : MonoBehaviour
         InitializePool();
         InitializeTimers();
 
-        // Инициализация списка активных объектов
+        // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃРїРёСЃРєР° Р°РєС‚РёРІРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
         if (useActiveLimit)
         {
             activeObjects = new List<GameObject>();
@@ -176,13 +176,13 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Инициализация пула объектов
+    /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСѓР»Р° РѕР±СЉРµРєС‚РѕРІ
     /// </summary>
     private void InitializePool()
     {
         if (!useDropSystem && prefabToSpawn != null && ObjectPoolManager.HasInstance)
         {
-            // Исправленная строка - убираем лишний параметр poolRandomPercentage
+            // РСЃРїСЂР°РІР»РµРЅРЅР°СЏ СЃС‚СЂРѕРєР° - СѓР±РёСЂР°РµРј Р»РёС€РЅРёР№ РїР°СЂР°РјРµС‚СЂ poolRandomPercentage
             ObjectPoolManager.Instance.CreatePool(prefabToSpawn, initialPoolSize, poolExpandable);
         }
         else if (useDropSystem && dropItems != null && dropItems.Length > 0 && ObjectPoolManager.HasInstance)
@@ -192,7 +192,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Инициализация таймеров для точек спавна
+    /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С‚Р°Р№РјРµСЂРѕРІ РґР»СЏ С‚РѕС‡РµРє СЃРїР°РІРЅР°
     /// </summary>
     private void InitializeTimers()
     {
@@ -215,7 +215,7 @@ public class AdvancedSpawner : MonoBehaviour
     #region Timer Management
 
     /// <summary>
-    /// Обновление таймеров спавна
+    /// РћР±РЅРѕРІР»РµРЅРёРµ С‚Р°Р№РјРµСЂРѕРІ СЃРїР°РІРЅР°
     /// </summary>
     private void UpdateTimers()
     {
@@ -239,7 +239,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Обновление таймера для одиночной точки
+    /// РћР±РЅРѕРІР»РµРЅРёРµ С‚Р°Р№РјРµСЂР° РґР»СЏ РѕРґРёРЅРѕС‡РЅРѕР№ С‚РѕС‡РєРё
     /// </summary>
     private void UpdateSinglePointTimer()
     {
@@ -256,7 +256,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Обновление таймеров для множественных точек
+    /// РћР±РЅРѕРІР»РµРЅРёРµ С‚Р°Р№РјРµСЂРѕРІ РґР»СЏ РјРЅРѕР¶РµСЃС‚РІРµРЅРЅС‹С… С‚РѕС‡РµРє
     /// </summary>
     private void UpdateMultiplePointsTimers()
     {
@@ -283,7 +283,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Обновление глобального таймера
+    /// РћР±РЅРѕРІР»РµРЅРёРµ РіР»РѕР±Р°Р»СЊРЅРѕРіРѕ С‚Р°Р№РјРµСЂР°
     /// </summary>
     private void UpdateGlobalTimer()
     {
@@ -298,7 +298,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Получение интервала в зависимости от типа
+    /// РџРѕР»СѓС‡РµРЅРёРµ РёРЅС‚РµСЂРІР°Р»Р° РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РёРїР°
     /// </summary>
     private float GetInterval(IntervalType type, float baseInterval, Vector2 range, float[] intervals)
     {
@@ -324,13 +324,13 @@ public class AdvancedSpawner : MonoBehaviour
     #region Spawn Methods
 
     /// <summary>
-    /// Спавн объектов в зависимости от типа спавна
+    /// РЎРїР°РІРЅ РѕР±СЉРµРєС‚РѕРІ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РёРїР° СЃРїР°РІРЅР°
     /// </summary>
     public void SpawnObjects()
     {
         if (!isInitialized) return;
 
-        // Проверяем разрешение на спавн
+        // РџСЂРѕРІРµСЂСЏРµРј СЂР°Р·СЂРµС€РµРЅРёРµ РЅР° СЃРїР°РІРЅ
         if (useActiveLimit && !isSpawningAllowed)
         {
             return;
@@ -372,7 +372,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Получение случайной точки спавна с учетом весов
+    /// РџРѕР»СѓС‡РµРЅРёРµ СЃР»СѓС‡Р°Р№РЅРѕР№ С‚РѕС‡РєРё СЃРїР°РІРЅР° СЃ СѓС‡РµС‚РѕРј РІРµСЃРѕРІ
     /// </summary>
     private void GetRandomSpawnPoint(out Vector3 position, out Quaternion rotation)
     {
@@ -381,7 +381,7 @@ public class AdvancedSpawner : MonoBehaviour
 
         if (spawnPoints == null || spawnPoints.Length == 0) return;
 
-        // Вычисляем общую сумму весов
+        // Р’С‹С‡РёСЃР»СЏРµРј РѕР±С‰СѓСЋ СЃСѓРјРјСѓ РІРµСЃРѕРІ
         float totalWeight = 0f;
         foreach (var pointData in spawnPoints)
         {
@@ -391,7 +391,7 @@ public class AdvancedSpawner : MonoBehaviour
             }
         }
 
-        // Выбираем случайную точку по весу
+        // Р’С‹Р±РёСЂР°РµРј СЃР»СѓС‡Р°Р№РЅСѓСЋ С‚РѕС‡РєСѓ РїРѕ РІРµСЃСѓ
         float randomValue = Random.Range(0f, totalWeight);
         float currentWeight = 0f;
 
@@ -408,7 +408,7 @@ public class AdvancedSpawner : MonoBehaviour
             }
         }
 
-        // Если что-то пошло не так, берем первую точку
+        // Р•СЃР»Рё С‡С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє, Р±РµСЂРµРј РїРµСЂРІСѓСЋ С‚РѕС‡РєСѓ
         if (spawnPoints[0].point != null)
         {
             position = spawnPoints[0].point.position;
@@ -417,7 +417,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Получение случайной позиции в области
+    /// РџРѕР»СѓС‡РµРЅРёРµ СЃР»СѓС‡Р°Р№РЅРѕР№ РїРѕР·РёС†РёРё РІ РѕР±Р»Р°СЃС‚Рё
     /// </summary>
     private Vector3 GetRandomPositionInArea()
     {
@@ -431,13 +431,13 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Спавн объекта в указанной точке
+    /// РЎРїР°РІРЅ РѕР±СЉРµРєС‚Р° РІ СѓРєР°Р·Р°РЅРЅРѕР№ С‚РѕС‡РєРµ
     /// </summary>
     private void SpawnAtPoint(Vector3 position, Quaternion rotation)
     {
         if (!ObjectPoolManager.HasInstance) return;
 
-        // Проверяем разрешение на спавн
+        // РџСЂРѕРІРµСЂСЏРµРј СЂР°Р·СЂРµС€РµРЅРёРµ РЅР° СЃРїР°РІРЅ
         if (useActiveLimit && !isSpawningAllowed)
         {
             return;
@@ -447,21 +447,21 @@ public class AdvancedSpawner : MonoBehaviour
 
         if (useDropSystem && dropItems != null && dropItems.Length > 0)
         {
-            // Используем систему выпадения
+            // РСЃРїРѕР»СЊР·СѓРµРј СЃРёСЃС‚РµРјСѓ РІС‹РїР°РґРµРЅРёСЏ
             obj = ObjectPoolManager.Instance.GetDropObject(dropItems, position, rotation);
         }
         else if (prefabToSpawn != null)
         {
-            // Обычный спавн
+            // РћР±С‹С‡РЅС‹Р№ СЃРїР°РІРЅ
             obj = ObjectPoolManager.Instance.GetPooledObject(prefabToSpawn, position, rotation);
         }
 
         if (obj != null)
         {
             OnObjectSpawned(obj);
-            AddActiveObject(obj); // Добавляем в список активных
+            AddActiveObject(obj); // Р”РѕР±Р°РІР»СЏРµРј РІ СЃРїРёСЃРѕРє Р°РєС‚РёРІРЅС‹С…
 
-            // Проверяем лимит сразу после спавна
+            // РџСЂРѕРІРµСЂСЏРµРј Р»РёРјРёС‚ СЃСЂР°Р·Сѓ РїРѕСЃР»Рµ СЃРїР°РІРЅР°
             if (useActiveLimit && activeObjects != null && activeObjects.Count >= maxActiveObjects)
             {
                 isSpawningAllowed = false;
@@ -470,11 +470,11 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Обработка события спавна объекта
+    /// РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ СЃРїР°РІРЅР° РѕР±СЉРµРєС‚Р°
     /// </summary>
     protected virtual void OnObjectSpawned(GameObject obj)
     {
-        // Переопределяется в наследниках для дополнительной логики
+        // РџРµСЂРµРѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ РІ РЅР°СЃР»РµРґРЅРёРєР°С… РґР»СЏ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ Р»РѕРіРёРєРё
     }
 
     #endregion
@@ -482,11 +482,11 @@ public class AdvancedSpawner : MonoBehaviour
     #region Public Methods
 
     /// <summary>
-    /// Мгновенный спавн объектов
+    /// РњРіРЅРѕРІРµРЅРЅС‹Р№ СЃРїР°РІРЅ РѕР±СЉРµРєС‚РѕРІ
     /// </summary>
     public void ForceSpawn()
     {
-        // Принудительный спавн игнорирует лимиты
+        // РџСЂРёРЅСѓРґРёС‚РµР»СЊРЅС‹Р№ СЃРїР°РІРЅ РёРіРЅРѕСЂРёСЂСѓРµС‚ Р»РёРјРёС‚С‹
         bool wasSpawningAllowed = isSpawningAllowed;
         isSpawningAllowed = true;
         SpawnObjects();
@@ -494,7 +494,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Установка префаба для спавна
+    /// РЈСЃС‚Р°РЅРѕРІРєР° РїСЂРµС„Р°Р±Р° РґР»СЏ СЃРїР°РІРЅР°
     /// </summary>
     public void SetPrefab(GameObject prefab)
     {
@@ -503,7 +503,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Установка типа спавна
+    /// РЈСЃС‚Р°РЅРѕРІРєР° С‚РёРїР° СЃРїР°РІРЅР°
     /// </summary>
     public void SetSpawnType(SpawnType type)
     {
@@ -511,7 +511,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Установка лимитов активных объектов
+    /// РЈСЃС‚Р°РЅРѕРІРєР° Р»РёРјРёС‚РѕРІ Р°РєС‚РёРІРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
     /// </summary>
     public void SetActiveObjectsLimit(int min, int max)
     {
@@ -520,7 +520,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Включение/выключение системы лимитов
+    /// Р’РєР»СЋС‡РµРЅРёРµ/РІС‹РєР»СЋС‡РµРЅРёРµ СЃРёСЃС‚РµРјС‹ Р»РёРјРёС‚РѕРІ
     /// </summary>
     public void SetActiveLimitEnabled(bool enabled)
     {
@@ -538,7 +538,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Добавление точки спавна
+    /// Р”РѕР±Р°РІР»РµРЅРёРµ С‚РѕС‡РєРё СЃРїР°РІРЅР°
     /// </summary>
     public void AddSpawnPoint(Transform point, float weight = 1f)
     {
@@ -563,7 +563,7 @@ public class AdvancedSpawner : MonoBehaviour
     #region Active Objects Management
 
     /// <summary>
-    /// Проверка лимитов активных объектов
+    /// РџСЂРѕРІРµСЂРєР° Р»РёРјРёС‚РѕРІ Р°РєС‚РёРІРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
     /// </summary>
     private IEnumerator CheckActiveObjectsLimit()
     {
@@ -573,10 +573,10 @@ public class AdvancedSpawner : MonoBehaviour
 
             if (!useActiveLimit || activeObjects == null) continue;
 
-            // Убираем уничтоженные объекты из списка
+            // РЈР±РёСЂР°РµРј СѓРЅРёС‡С‚РѕР¶РµРЅРЅС‹Рµ РѕР±СЉРµРєС‚С‹ РёР· СЃРїРёСЃРєР°
             activeObjects.RemoveAll(obj => obj == null);
 
-            // Проверяем лимиты
+            // РџСЂРѕРІРµСЂСЏРµРј Р»РёРјРёС‚С‹
             if (activeObjects.Count >= maxActiveObjects)
             {
                 isSpawningAllowed = false;
@@ -593,7 +593,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Добавление объекта в список активных
+    /// Р”РѕР±Р°РІР»РµРЅРёРµ РѕР±СЉРµРєС‚Р° РІ СЃРїРёСЃРѕРє Р°РєС‚РёРІРЅС‹С…
     /// </summary>
     private void AddActiveObject(GameObject obj)
     {
@@ -601,7 +601,7 @@ public class AdvancedSpawner : MonoBehaviour
         {
             activeObjects.Add(obj);
 
-            // Добавляем callback для автоматического удаления из списка
+            // Р”РѕР±Р°РІР»СЏРµРј callback РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ СѓРґР°Р»РµРЅРёСЏ РёР· СЃРїРёСЃРєР°
             var pooledObj = obj.GetComponent<ObjectPoolManager.PooledObject>();
             if (pooledObj != null)
             {
@@ -611,7 +611,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Удаление объекта из списка активных
+    /// РЈРґР°Р»РµРЅРёРµ РѕР±СЉРµРєС‚Р° РёР· СЃРїРёСЃРєР° Р°РєС‚РёРІРЅС‹С…
     /// </summary>
     private void RemoveActiveObject(GameObject obj)
     {
@@ -622,7 +622,7 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Принудительная очистка активных объектов
+    /// РџСЂРёРЅСѓРґРёС‚РµР»СЊРЅР°СЏ РѕС‡РёСЃС‚РєР° Р°РєС‚РёРІРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
     /// </summary>
     public void ClearActiveObjects()
     {
@@ -640,13 +640,13 @@ public class AdvancedSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// Получение текущего количества активных объектов
+    /// РџРѕР»СѓС‡РµРЅРёРµ С‚РµРєСѓС‰РµРіРѕ РєРѕР»РёС‡РµСЃС‚РІР° Р°РєС‚РёРІРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
     /// </summary>
     public int GetActiveObjectsCount()
     {
         if (activeObjects != null)
         {
-            // Убираем уничтоженные объекты перед подсчетом
+            // РЈР±РёСЂР°РµРј СѓРЅРёС‡С‚РѕР¶РµРЅРЅС‹Рµ РѕР±СЉРµРєС‚С‹ РїРµСЂРµРґ РїРѕРґСЃС‡РµС‚РѕРј
             activeObjects.RemoveAll(obj => obj == null);
             return activeObjects.Count;
         }
