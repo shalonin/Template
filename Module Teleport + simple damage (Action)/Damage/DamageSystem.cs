@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Данные события урона
+/// Р”Р°РЅРЅС‹Рµ СЃРѕР±С‹С‚РёСЏ СѓСЂРѕРЅР°
 /// </summary>
 public struct DamageEventData
 {
@@ -13,7 +13,7 @@ public struct DamageEventData
 }
 
 /// <summary>
-/// Статическая система урона
+/// РЎС‚Р°С‚РёС‡РµСЃРєР°СЏ СЃРёСЃС‚РµРјР° СѓСЂРѕРЅР°
 /// </summary>
 public static class DamageSystem
 {
