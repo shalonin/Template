@@ -3,15 +3,15 @@ using UnityEngine.UI;
 using TMPro;
 
 /// <summary>
-/// Компонент для автоматической локализации UI текстов
+/// РљРѕРјРїРѕРЅРµРЅС‚ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕР№ Р»РѕРєР°Р»РёР·Р°С†РёРё UI С‚РµРєСЃС‚РѕРІ
 /// </summary>
-//[RequireComponent(typeof(TMP_Text))] // Может быть Text, TextMeshProUGUI или другой
+//[RequireComponent(typeof(TMP_Text))] // РњРѕР¶РµС‚ Р±С‹С‚СЊ Text, TextMeshProUGUI РёР»Рё РґСЂСѓРіРѕР№
 public class LocalizedText : MonoBehaviour
 {
     [Header("Localization Settings")]
     [SerializeField] private string localizationKey = "";
     [SerializeField] private bool autoUpdate = true;
-    [SerializeField] private object[] formatArguments; // Аргументы для string.Format
+    [SerializeField] private object[] formatArguments; // РђСЂРіСѓРјРµРЅС‚С‹ РґР»СЏ string.Format
 
     private Text uiText;
     [SerializeField] private TMP_Text tmpText;
@@ -36,7 +36,7 @@ public class LocalizedText : MonoBehaviour
     #region Initialization
 
     /// <summary>
-    /// Инициализация компонентов
+    /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РєРѕРјРїРѕРЅРµРЅС‚РѕРІ
     /// </summary>
     private void Initialize()
     {
@@ -49,7 +49,7 @@ public class LocalizedText : MonoBehaviour
     }
 
     /// <summary>
-    /// Подписка на события локализации
+    /// РџРѕРґРїРёСЃРєР° РЅР° СЃРѕР±С‹С‚РёСЏ Р»РѕРєР°Р»РёР·Р°С†РёРё
     /// </summary>
     private void SubscribeToEvents()
     {
@@ -60,7 +60,7 @@ public class LocalizedText : MonoBehaviour
     }
 
     /// <summary>
-    /// Отписка от событий локализации
+    /// РћС‚РїРёСЃРєР° РѕС‚ СЃРѕР±С‹С‚РёР№ Р»РѕРєР°Р»РёР·Р°С†РёРё
     /// </summary>
     private void UnsubscribeFromEvents()
     {
@@ -75,7 +75,7 @@ public class LocalizedText : MonoBehaviour
     #region Event Handling
 
     /// <summary>
-    /// Обработка изменения языка
+    /// РћР±СЂР°Р±РѕС‚РєР° РёР·РјРµРЅРµРЅРёСЏ СЏР·С‹РєР°
     /// </summary>
     private void OnLanguageChanged(string languageCode)
     {
@@ -90,7 +90,7 @@ public class LocalizedText : MonoBehaviour
     #region Text Management
 
     /// <summary>
-    /// Обновление текста
+    /// РћР±РЅРѕРІР»РµРЅРёРµ С‚РµРєСЃС‚Р°
     /// </summary>
     public void UpdateText()
     {
@@ -121,7 +121,7 @@ public class LocalizedText : MonoBehaviour
     }
 
     /// <summary>
-    /// Установка ключа локализации
+    /// РЈСЃС‚Р°РЅРѕРІРєР° РєР»СЋС‡Р° Р»РѕРєР°Р»РёР·Р°С†РёРё
     /// </summary>
     public void SetLocalizationKey(string key)
     {
@@ -130,7 +130,7 @@ public class LocalizedText : MonoBehaviour
     }
 
     /// <summary>
-    /// Установка аргументов форматирования
+    /// РЈСЃС‚Р°РЅРѕРІРєР° Р°СЂРіСѓРјРµРЅС‚РѕРІ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёСЏ
     /// </summary>
     public void SetFormatArguments(params object[] args)
     {
@@ -143,7 +143,7 @@ public class LocalizedText : MonoBehaviour
     #region Editor Methods
 
     /// <summary>
-    /// Ручное обновление текста в редакторе
+    /// Р СѓС‡РЅРѕРµ РѕР±РЅРѕРІР»РµРЅРёРµ С‚РµРєСЃС‚Р° РІ СЂРµРґР°РєС‚РѕСЂРµ
     /// </summary>
     [ContextMenu("Update Text")]
     public void EditorUpdateText()
