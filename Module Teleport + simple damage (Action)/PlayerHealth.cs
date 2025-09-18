@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// Система здоровья игрока
+/// РЎРёСЃС‚РµРјР° Р·РґРѕСЂРѕРІСЊСЏ РёРіСЂРѕРєР°
 /// </summary>
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -47,7 +47,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void Initialize()
     {
-        currentHealth = maxHealth; // Всегда начинаем с максимального здоровья
+        currentHealth = maxHealth; // Р’СЃРµРіРґР° РЅР°С‡РёРЅР°РµРј СЃ РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ Р·РґРѕСЂРѕРІСЊСЏ
         deathHandler = GetComponent<PlayerDeathHandler>();
 
         playerRenderer = GetComponent<Renderer>();
@@ -132,7 +132,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        if (isDead) return; // Защита от повторного вызова
+        if (isDead) return; // Р—Р°С‰РёС‚Р° РѕС‚ РїРѕРІС‚РѕСЂРЅРѕРіРѕ РІС‹Р·РѕРІР°
 
         isDead = true;
         onPlayerDied?.Invoke();
@@ -155,7 +155,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void Heal(float amount)
     {
-        if (isDead) return; // Не лечим мертвого игрока
+        if (isDead) return; // РќРµ Р»РµС‡РёРј РјРµСЂС‚РІРѕРіРѕ РёРіСЂРѕРєР°
 
         float actualHeal = Mathf.Max(0, amount);
         currentHealth = Mathf.Min(maxHealth, currentHealth + actualHeal);
@@ -168,7 +168,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void FullHeal()
     {
-        if (isDead) return; // Не лечим мертвого игрока
+        if (isDead) return; // РќРµ Р»РµС‡РёРј РјРµСЂС‚РІРѕРіРѕ РёРіСЂРѕРєР°
 
         float healAmount = maxHealth - currentHealth;
         currentHealth = maxHealth;
@@ -184,13 +184,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     #region Public Methods for Respawn
 
     /// <summary>
-    /// Полное восстановление здоровья при респауне
+    /// РџРѕР»РЅРѕРµ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ Р·РґРѕСЂРѕРІСЊСЏ РїСЂРё СЂРµСЃРїР°СѓРЅРµ
     /// </summary>
     public void Respawn()
     {
-        currentHealth = maxHealth; // Восстанавливаем здоровье
-        isDead = false; // Сбрасываем состояние смерти
-        invincible = false; // Сбрасываем неуязвимость
+        currentHealth = maxHealth; // Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р·РґРѕСЂРѕРІСЊРµ
+        isDead = false; // РЎР±СЂР°СЃС‹РІР°РµРј СЃРѕСЃС‚РѕСЏРЅРёРµ СЃРјРµСЂС‚Рё
+        invincible = false; // РЎР±СЂР°СЃС‹РІР°РµРј РЅРµСѓСЏР·РІРёРјРѕСЃС‚СЊ
 
         onHealthChanged?.Invoke(currentHealth);
 
