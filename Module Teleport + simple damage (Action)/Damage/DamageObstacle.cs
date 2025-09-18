@@ -1,13 +1,13 @@
 using UnityEngine;
 
 /// <summary>
-/// Препятствие, которое наносит урон игроку при столкновении
-/// Поддерживает как Collider, так и CharacterController
+/// РџСЂРµРїСЏС‚СЃС‚РІРёРµ, РєРѕС‚РѕСЂРѕРµ РЅР°РЅРѕСЃРёС‚ СѓСЂРѕРЅ РёРіСЂРѕРєСѓ РїСЂРё СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё
+/// РџРѕРґРґРµСЂР¶РёРІР°РµС‚ РєР°Рє Collider, С‚Р°Рє Рё CharacterController
 /// </summary>
 
 
 /// <summary>
-/// Интерфейс для объектов, которые могут получать урон
+/// РРЅС‚РµСЂС„РµР№СЃ РґР»СЏ РѕР±СЉРµРєС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ РјРѕРіСѓС‚ РїРѕР»СѓС‡Р°С‚СЊ СѓСЂРѕРЅ
 /// </summary>
 public interface IDamageable
 {
@@ -16,8 +16,8 @@ public interface IDamageable
 
 
 /// <summary>
-/// Препятствие, которое наносит урон игроку при столкновении
-/// Поддерживает как Collider, так и CharacterController
+/// РџСЂРµРїСЏС‚СЃС‚РІРёРµ, РєРѕС‚РѕСЂРѕРµ РЅР°РЅРѕСЃРёС‚ СѓСЂРѕРЅ РёРіСЂРѕРєСѓ РїСЂРё СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё
+/// РџРѕРґРґРµСЂР¶РёРІР°РµС‚ РєР°Рє Collider, С‚Р°Рє Рё CharacterController
 /// </summary>
 public class DamageObstacle : MonoBehaviour
 {
@@ -63,22 +63,22 @@ public class DamageObstacle : MonoBehaviour
     {
         InitializeComponents();
 
-        // Подписываемся на событие респауна игрока
+        // РџРѕРґРїРёСЃС‹РІР°РµРјСЃСЏ РЅР° СЃРѕР±С‹С‚РёРµ СЂРµСЃРїР°СѓРЅР° РёРіСЂРѕРєР°
         TeleportManager.OnPlayerRespawned += OnPlayerRespawned;
     }
 
     private void OnDestroy()
     {
-        // Отписываемся от события
+        // РћС‚РїРёСЃС‹РІР°РµРјСЃСЏ РѕС‚ СЃРѕР±С‹С‚РёСЏ
         TeleportManager.OnPlayerRespawned -= OnPlayerRespawned;
     }
 
     private void Update()
     {
-        // Обработка непрерывного урона
+        // РћР±СЂР°Р±РѕС‚РєР° РЅРµРїСЂРµСЂС‹РІРЅРѕРіРѕ СѓСЂРѕРЅР°
         if (continuousDamage && isPlayerInContact && playerInTrigger != null && Time.time - lastDamageTime >= damageInterval)
         {
-            // Проверяем, жив ли игрок перед нанесением урона
+            // РџСЂРѕРІРµСЂСЏРµРј, Р¶РёРІ Р»Рё РёРіСЂРѕРє РїРµСЂРµРґ РЅР°РЅРµСЃРµРЅРёРµРј СѓСЂРѕРЅР°
             var playerHealth = playerInTrigger.GetComponent<PlayerHealth>();
             if (playerHealth != null && playerHealth.IsAlive)
             {
@@ -87,7 +87,7 @@ public class DamageObstacle : MonoBehaviour
             }
             else
             {
-                // Если игрок мертв, прекращаем наносить урон
+                // Р•СЃР»Рё РёРіСЂРѕРє РјРµСЂС‚РІ, РїСЂРµРєСЂР°С‰Р°РµРј РЅР°РЅРѕСЃРёС‚СЊ СѓСЂРѕРЅ
                 isPlayerInContact = false;
                 playerInTrigger = null;
             }
@@ -99,11 +99,11 @@ public class DamageObstacle : MonoBehaviour
     #region Event Handling
 
     /// <summary>
-    /// Обработка события респауна игрока
+    /// РћР±СЂР°Р±РѕС‚РєР° СЃРѕР±С‹С‚РёСЏ СЂРµСЃРїР°СѓРЅР° РёРіСЂРѕРєР°
     /// </summary>
     private void OnPlayerRespawned()
     {
-        // Сбрасываем состояние контакта при респауне игрока
+        // РЎР±СЂР°СЃС‹РІР°РµРј СЃРѕСЃС‚РѕСЏРЅРёРµ РєРѕРЅС‚Р°РєС‚Р° РїСЂРё СЂРµСЃРїР°СѓРЅРµ РёРіСЂРѕРєР°
         isPlayerInContact = false;
         playerInTrigger = null;
     }
@@ -150,7 +150,7 @@ public class DamageObstacle : MonoBehaviour
     {
         if (useTrigger && CheckTarget(other))
         {
-            // Для одноразового урона
+            // Р”Р»СЏ РѕРґРЅРѕСЂР°Р·РѕРІРѕРіРѕ СѓСЂРѕРЅР°
             if (!continuousDamage && Time.time - lastDamageTime >= damageInterval)
             {
                 var playerHealth = other.gameObject.GetComponent<PlayerHealth>();
@@ -210,7 +210,7 @@ public class DamageObstacle : MonoBehaviour
     {
         if (onlyPlayer && target.CompareTag(targetTag))
         {
-            // Проверяем, жив ли игрок
+            // РџСЂРѕРІРµСЂСЏРµРј, Р¶РёРІ Р»Рё РёРіСЂРѕРє
             var playerHealth = target.GetComponent<PlayerHealth>();
             if (playerHealth != null && playerHealth.IsAlive)
             {
@@ -250,11 +250,11 @@ public class DamageObstacle : MonoBehaviour
 
     private void DealDamageToTarget(GameObject target)
     {
-        // Проверяем, жив ли цель
+        // РџСЂРѕРІРµСЂСЏРµРј, Р¶РёРІ Р»Рё С†РµР»СЊ
         var playerHealth = target.GetComponent<PlayerHealth>();
         if (playerHealth != null && !playerHealth.IsAlive)
         {
-            // Не наносим урон мертвому игроку
+            // РќРµ РЅР°РЅРѕСЃРёРј СѓСЂРѕРЅ РјРµСЂС‚РІРѕРјСѓ РёРіСЂРѕРєСѓ
             return;
         }
 
@@ -360,7 +360,7 @@ public class DamageObstacle : MonoBehaviour
 
     public void ForceDamageTarget(GameObject target)
     {
-        // Проверяем, жив ли цель перед нанесением урона
+        // РџСЂРѕРІРµСЂСЏРµРј, Р¶РёРІ Р»Рё С†РµР»СЊ РїРµСЂРµРґ РЅР°РЅРµСЃРµРЅРёРµРј СѓСЂРѕРЅР°
         var playerHealth = target.GetComponent<PlayerHealth>();
         if (playerHealth != null && !playerHealth.IsAlive)
         {
