@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Обработчик сбора предметов игроком
+/// РћР±СЂР°Р±РѕС‚С‡РёРє СЃР±РѕСЂР° РїСЂРµРґРјРµС‚РѕРІ РёРіСЂРѕРєРѕРј
 /// </summary>
 public class PlayerCollectibleHandler : MonoBehaviour
 {
@@ -19,11 +19,11 @@ public class PlayerCollectibleHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// Обработка триггера от предмета
+    /// РћР±СЂР°Р±РѕС‚РєР° С‚СЂРёРіРіРµСЂР° РѕС‚ РїСЂРµРґРјРµС‚Р°
     /// </summary>
     private void OnCollectibleTrigger(SpawnedObject spawnedObject, SpawnedObject.TriggerType triggerType, object triggerData)
     {
-        // Проверяем что это игрок собрал предмет
+        // РџСЂРѕРІРµСЂСЏРµРј С‡С‚Рѕ СЌС‚Рѕ РёРіСЂРѕРє СЃРѕР±СЂР°Р» РїСЂРµРґРјРµС‚
         if (triggerType == SpawnedObject.TriggerType.PlayerCollected)
         {
             var player = triggerData as GameObject;
@@ -35,7 +35,7 @@ public class PlayerCollectibleHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// Обработка сбора предмета
+    /// РћР±СЂР°Р±РѕС‚РєР° СЃР±РѕСЂР° РїСЂРµРґРјРµС‚Р°
     /// </summary>
     private void ProcessCollection(SpawnedObject spawnedObject, GameObject player)
     {
