@@ -2,13 +2,13 @@ using UnityEngine;
 using System;
 
 /// <summary>
-/// Компонент для объектов, созданных через спавнер
-/// Генерирует события для взаимодействия с другими системами
+/// РљРѕРјРїРѕРЅРµРЅС‚ РґР»СЏ РѕР±СЉРµРєС‚РѕРІ, СЃРѕР·РґР°РЅРЅС‹С… С‡РµСЂРµР· СЃРїР°РІРЅРµСЂ
+/// Р“РµРЅРµСЂРёСЂСѓРµС‚ СЃРѕР±С‹С‚РёСЏ РґР»СЏ РІР·Р°РёРјРѕРґРµР№СЃС‚РІРёСЏ СЃ РґСЂСѓРіРёРјРё СЃРёСЃС‚РµРјР°РјРё
 /// </summary>
 public class SpawnedObject : MonoBehaviour
 {
     /// <summary>
-    /// Типы событий для заспавненного объекта
+    /// РўРёРїС‹ СЃРѕР±С‹С‚РёР№ РґР»СЏ Р·Р°СЃРїР°РІРЅРµРЅРЅРѕРіРѕ РѕР±СЉРµРєС‚Р°
     /// </summary>
     public enum TriggerType
     {
@@ -20,7 +20,7 @@ public class SpawnedObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Событие срабатывания триггера
+    /// РЎРѕР±С‹С‚РёРµ СЃСЂР°Р±Р°С‚С‹РІР°РЅРёСЏ С‚СЂРёРіРіРµСЂР°
     /// </summary>
     public static event Action<SpawnedObject, TriggerType, object> OnTriggerActivated;
 
@@ -39,13 +39,13 @@ public class SpawnedObject : MonoBehaviour
 
     private void Awake()
     {
-        // Кэшируем компоненты при создании
+        // РљСЌС€РёСЂСѓРµРј РєРѕРјРїРѕРЅРµРЅС‚С‹ РїСЂРё СЃРѕР·РґР°РЅРёРё
         CacheComponents();
     }
 
     private void OnEnable()
     {
-        // При активации объекта включаем компоненты
+        // РџСЂРё Р°РєС‚РёРІР°С†РёРё РѕР±СЉРµРєС‚Р° РІРєР»СЋС‡Р°РµРј РєРѕРјРїРѕРЅРµРЅС‚С‹
         EnableComponents();
         isDestroyed = false;
         spawnTime = Time.time;
@@ -53,7 +53,7 @@ public class SpawnedObject : MonoBehaviour
 
     private void OnDisable()
     {
-        // При деактивации очищаем состояние
+        // РџСЂРё РґРµР°РєС‚РёРІР°С†РёРё РѕС‡РёС‰Р°РµРј СЃРѕСЃС‚РѕСЏРЅРёРµ
         isDestroyed = false;
     }
 
@@ -84,7 +84,7 @@ public class SpawnedObject : MonoBehaviour
     #region Component Management
 
     /// <summary>
-    /// Кэширование компонентов
+    /// РљСЌС€РёСЂРѕРІР°РЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚РѕРІ
     /// </summary>
     private void CacheComponents()
     {
@@ -93,7 +93,7 @@ public class SpawnedObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Включение компонентов при активации
+    /// Р’РєР»СЋС‡РµРЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚РѕРІ РїСЂРё Р°РєС‚РёРІР°С†РёРё
     /// </summary>
     private void EnableComponents()
     {
@@ -102,7 +102,7 @@ public class SpawnedObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Отключение компонентов при деактивации
+    /// РћС‚РєР»СЋС‡РµРЅРёРµ РєРѕРјРїРѕРЅРµРЅС‚РѕРІ РїСЂРё РґРµР°РєС‚РёРІР°С†РёРё
     /// </summary>
     private void DisableComponents()
     {
@@ -115,7 +115,7 @@ public class SpawnedObject : MonoBehaviour
     #region Trigger Management
 
     /// <summary>
-    /// Активация триггера с указанным типом
+    /// РђРєС‚РёРІР°С†РёСЏ С‚СЂРёРіРіРµСЂР° СЃ СѓРєР°Р·Р°РЅРЅС‹Рј С‚РёРїРѕРј
     /// </summary>
     public void ActivateTrigger(TriggerType triggerType, object triggerData = null)
     {
@@ -148,7 +148,7 @@ public class SpawnedObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Возврат объекта в пул
+    /// Р’РѕР·РІСЂР°С‚ РѕР±СЉРµРєС‚Р° РІ РїСѓР»
     /// </summary>
     public void ReturnToPool()
     {
@@ -156,7 +156,7 @@ public class SpawnedObject : MonoBehaviour
 
         isDestroyed = true;
 
-        // Отключаем компоненты перед возвратом в пул
+        // РћС‚РєР»СЋС‡Р°РµРј РєРѕРјРїРѕРЅРµРЅС‚С‹ РїРµСЂРµРґ РІРѕР·РІСЂР°С‚РѕРј РІ РїСѓР»
         DisableComponents();
 
         if (ObjectPoolManager.HasInstance)
@@ -170,7 +170,7 @@ public class SpawnedObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Принудительное уничтожение объекта
+    /// РџСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕРµ СѓРЅРёС‡С‚РѕР¶РµРЅРёРµ РѕР±СЉРµРєС‚Р°
     /// </summary>
     public void ForceDestroy()
     {
@@ -185,7 +185,7 @@ public class SpawnedObject : MonoBehaviour
     #region Lifetime Management
 
     /// <summary>
-    /// Проверка времени жизни объекта
+    /// РџСЂРѕРІРµСЂРєР° РІСЂРµРјРµРЅРё Р¶РёР·РЅРё РѕР±СЉРµРєС‚Р°
     /// </summary>
     private void CheckLifetime()
     {
