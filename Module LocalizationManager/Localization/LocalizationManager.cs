@@ -4,12 +4,12 @@ using System.Globalization;
 using System;
 
 /// <summary>
-/// Менеджер локализации для мультиязычных игр
+/// РњРµРЅРµРґР¶РµСЂ Р»РѕРєР°Р»РёР·Р°С†РёРё РґР»СЏ РјСѓР»СЊС‚РёСЏР·С‹С‡РЅС‹С… РёРіСЂ
 /// </summary>
 public class LocalizationManager : Singleton<LocalizationManager>
 {
     /// <summary>
-    /// Вспомогательный класс для сериализации переводов
+    /// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ РґР»СЏ СЃРµСЂРёР°Р»РёР·Р°С†РёРё РїРµСЂРµРІРѕРґРѕРІ
     /// </summary>
     [Serializable]
     public class TranslationEntry
@@ -25,16 +25,16 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Данные локализации для одного языка
+    /// Р”Р°РЅРЅС‹Рµ Р»РѕРєР°Р»РёР·Р°С†РёРё РґР»СЏ РѕРґРЅРѕРіРѕ СЏР·С‹РєР°
     /// </summary>
     [Serializable]
     public class LanguageData
     {
         public string languageCode = "en";
         public string languageName = "English";
-        public TranslationEntry[] translations; // Массив вместо Dictionary для сериализации
+        public TranslationEntry[] translations; // РњР°СЃСЃРёРІ РІРјРµСЃС‚Рѕ Dictionary РґР»СЏ СЃРµСЂРёР°Р»РёР·Р°С†РёРё
 
-        // Внутренний словарь для быстрого доступа
+        // Р’РЅСѓС‚СЂРµРЅРЅРёР№ СЃР»РѕРІР°СЂСЊ РґР»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РґРѕСЃС‚СѓРїР°
         [NonSerialized]
         public Dictionary<string, string> translationDict;
 
@@ -44,7 +44,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
         }
 
         /// <summary>
-        /// Инициализация словаря из массива переводов
+        /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃР»РѕРІР°СЂСЏ РёР· РјР°СЃСЃРёРІР° РїРµСЂРµРІРѕРґРѕРІ
         /// </summary>
         public void InitializeDictionary()
         {
@@ -63,7 +63,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Вспомогательный класс для десериализации JSON
+    /// Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ РґР»СЏ РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёРё JSON
     /// </summary>
     [Serializable]
     private class LanguageDataWrapper
@@ -74,7 +74,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Событие изменения языка
+    /// РЎРѕР±С‹С‚РёРµ РёР·РјРµРЅРµРЅРёСЏ СЏР·С‹РєР°
     /// </summary>
     public static event Action<string> OnLanguageChanged;
 
@@ -104,7 +104,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     #region Initialization
 
     /// <summary>
-    /// Инициализация менеджера локализации
+    /// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РјРµРЅРµРґР¶РµСЂР° Р»РѕРєР°Р»РёР·Р°С†РёРё
     /// </summary>
     private void Initialize()
     {
@@ -118,7 +118,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Загрузка всех языковых файлов
+    /// Р—Р°РіСЂСѓР·РєР° РІСЃРµС… СЏР·С‹РєРѕРІС‹С… С„Р°Р№Р»РѕРІ
     /// </summary>
     private void LoadLanguages()
     {
@@ -162,7 +162,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Создание дефолтного языка
+    /// РЎРѕР·РґР°РЅРёРµ РґРµС„РѕР»С‚РЅРѕРіРѕ СЏР·С‹РєР°
     /// </summary>
     private void CreateDefaultLanguage()
     {
@@ -184,7 +184,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Установка начального языка
+    /// РЈСЃС‚Р°РЅРѕРІРєР° РЅР°С‡Р°Р»СЊРЅРѕРіРѕ СЏР·С‹РєР°
     /// </summary>
     private void SetInitialLanguage()
     {
@@ -203,7 +203,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Получение языка системы
+    /// РџРѕР»СѓС‡РµРЅРёРµ СЏР·С‹РєР° СЃРёСЃС‚РµРјС‹
     /// </summary>
     private string GetSystemLanguage()
     {
@@ -234,7 +234,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     #region Language Management
 
     /// <summary>
-    /// Установка языка
+    /// РЈСЃС‚Р°РЅРѕРІРєР° СЏР·С‹РєР°
     /// </summary>
     public void SetLanguage(string languageCode)
     {
@@ -257,7 +257,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Получение перевода по ключу
+    /// РџРѕР»СѓС‡РµРЅРёРµ РїРµСЂРµРІРѕРґР° РїРѕ РєР»СЋС‡Сѓ
     /// </summary>
     public string GetTranslation(string key, params object[] args)
     {
@@ -302,7 +302,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Получение текущего языка
+    /// РџРѕР»СѓС‡РµРЅРёРµ С‚РµРєСѓС‰РµРіРѕ СЏР·С‹РєР°
     /// </summary>
     public string GetCurrentLanguage()
     {
@@ -310,7 +310,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Получение названия языка
+    /// РџРѕР»СѓС‡РµРЅРёРµ РЅР°Р·РІР°РЅРёСЏ СЏР·С‹РєР°
     /// </summary>
     public string GetLanguageName(string languageCode)
     {
@@ -322,7 +322,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Получение списка доступных языков
+    /// РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РґРѕСЃС‚СѓРїРЅС‹С… СЏР·С‹РєРѕРІ
     /// </summary>
     public List<string> GetAvailableLanguages()
     {
@@ -330,7 +330,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Проверка поддерживает ли язык игра
+    /// РџСЂРѕРІРµСЂРєР° РїРѕРґРґРµСЂР¶РёРІР°РµС‚ Р»Рё СЏР·С‹Рє РёРіСЂР°
     /// </summary>
     public bool IsLanguageSupported(string languageCode)
     {
@@ -342,7 +342,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     #region Utility Methods
 
     /// <summary>
-    /// Добавление нового языка в runtime
+    /// Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ СЏР·С‹РєР° РІ runtime
     /// </summary>
     public void AddLanguage(LanguageData languageData)
     {
@@ -355,7 +355,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Обновление перевода для ключа
+    /// РћР±РЅРѕРІР»РµРЅРёРµ РїРµСЂРµРІРѕРґР° РґР»СЏ РєР»СЋС‡Р°
     /// </summary>
     public void UpdateTranslation(string languageCode, string key, string translation)
     {
@@ -364,7 +364,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
             var lang = languages[languageCode];
             lang.translationDict[key] = translation;
 
-            // Обновляем массив для сериализации
+            // РћР±РЅРѕРІР»СЏРµРј РјР°СЃСЃРёРІ РґР»СЏ СЃРµСЂРёР°Р»РёР·Р°С†РёРё
             var list = new List<TranslationEntry>(lang.translations ?? new TranslationEntry[0]);
             var existingEntry = list.Find(e => e.key == key);
             if (existingEntry != null)
@@ -380,7 +380,7 @@ public class LocalizationManager : Singleton<LocalizationManager>
     }
 
     /// <summary>
-    /// Получение количества доступных языков
+    /// РџРѕР»СѓС‡РµРЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° РґРѕСЃС‚СѓРїРЅС‹С… СЏР·С‹РєРѕРІ
     /// </summary>
     public int GetLanguagesCount()
     {
