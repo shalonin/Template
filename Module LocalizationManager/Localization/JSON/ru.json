@@ -1,0 +1,34 @@
+{
+    "languageCode": "ru",
+    "languageName": "Русский",
+    "translations": [
+        {
+            "key": "welcome",
+            "value": "Добро пожаловать в игру!"
+        },
+        {
+            "key": "start_game",
+            "value": "Начать игру"
+        },
+        {
+            "key": "settings",
+            "value": "Настройки"
+        },
+        {
+            "key": "quit",
+            "value": "Выйти"
+        },
+        {
+            "key": "player_health",
+            "value": "Здоровье: {0}/{1}"
+        },
+        {
+            "key": "level_complete",
+            "value": "Уровень пройден!"
+        },
+        {
+            "key": "score",
+            "value": "Счет: {0}"
+        }
+    ]
+}
