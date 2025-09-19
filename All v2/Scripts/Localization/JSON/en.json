@@ -1,0 +1,34 @@
+{
+    "languageCode": "en",
+    "languageName": "English",
+    "translations": [
+        {
+            "key": "welcome",
+            "value": "Welcome to the game!"
+        },
+        {
+            "key": "start_game",
+            "value": "Start Game"
+        },
+        {
+            "key": "settings",
+            "value": "Settings"
+        },
+        {
+            "key": "quit",
+            "value": "Quit"
+        },
+        {
+            "key": "player_health",
+            "value": "Health: {0}/{1}"
+        },
+        {
+            "key": "level_complete",
+            "value": "Level Complete!"
+        },
+        {
+            "key": "score",
+            "value": "Score: {0}"
+        }
+    ]
+}
